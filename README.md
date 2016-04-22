@@ -1,4 +1,4 @@
- Contacts
+Contacts
 ===========
 Example project that shows how to implement a contact list using a UITableViewController
 
