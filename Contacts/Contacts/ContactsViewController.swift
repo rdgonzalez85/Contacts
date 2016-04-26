@@ -12,7 +12,7 @@ protocol ContactsViewControllerDelegate : class {
     func contactSelected(contact : Contact)
 }
 
-typealias ContactsHandler = (contacts : [Contact] , error : NSError?) -> Void
+typealias ContactsHandler = (contacts : [Contact]? , error : NSError?) -> Void
 
 class ContactsViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
@@ -55,8 +55,17 @@ class ContactsViewController: UITableViewController, UISearchResultsUpdating, UI
         tableView.tableFooterView = UIView()
         
         getContacts { (contacts, error) -> Void in
-            self.contacts = contacts
+            if contacts != nil {
+                self.contacts = contacts!
+            }
+            if error != nil {
+                self.showError(error!)
+            }
         }
+    }
+    
+    func showError(error : NSError) {
+        // to be overriden
     }
     
     func getContacts(onCompletition : ContactsHandler) {
