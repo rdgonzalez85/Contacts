@@ -83,6 +83,10 @@ class ContactsViewController: UITableViewController, UISearchResultsUpdating, UI
         self.tableView.tableHeaderView = contactsSearchController.searchBar
     }
     
+    func selectedContact(contact : Contact) {
+        delegate?.contactSelected(contact)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -121,7 +125,7 @@ class ContactsViewController: UITableViewController, UISearchResultsUpdating, UI
         if contactsSearchController.active {
             contact = filteredContacts[indexPath.row]
         }
-        delegate?.contactSelected(contact)
+        selectedContact(contact)
     }
     
     // MARK: - Search Actions
